@@ -1,0 +1,94 @@
+#col-team {
+    background: wheat;
+}
+#col-content {
+    background: lightblue;
+}
+#col-bet {
+    background: darkolivegreen;
+}
+.sports-content .col-content {
+    height: 725px;
+    padding: 15px;
+}
+.sports-content .col-content th {
+    background: #ffffff;
+}
+div#tblTeam_length {
+    display: none !important;
+}
+.btnTeam  {
+    cursor: pointer;
+}
+#tblTeam {
+    font-size: 11px;
+}
+#tblTeam th {
+    text-align: center;
+    padding:5px 0;
+}
+.chk-form, .chk-p {
+    display: inline;
+}
+
+.form-body {
+    background: rgba(255,255,255,0.6);
+    padding: 10px 25px;
+    border-radius: 20px;
+    height: 556px;
+    max-height: 556px;
+    overflow: auto;
+}
+.form-footer {
+    background: rgba(255,255,255,0.5);
+    padding: 25px 35px;
+    border-radius: 20px;
+    margin-top: 30px;
+    text-align: center;
+    position: absolute;
+    bottom: 20px
+}
+.form-group {
+    /*margin-bottom: 15px;*/
+    /*background: lightblue;*/
+    /*padding: 5px 16px;*/
+    /*border-radius: 10px;*/
+    /*font-size: 16px;*/
+}
+h1#teamID {
+    text-align: center;
+    margin-bottom: 20px;
+}
+div#tblTeam_info {
+    width: 200px;
+    font-size: 13px;
+}
+div#tblTeam_paginate {
+    font-size: 13px;
+}
+input[type="search"] {
+    width: 142px;
+}
+div#opt-filter {
+    position: absolute;
+    top: 10px;
+    z-index:10;
+}
+div#radio-sports {
+    background: rgba(255,255,255,0.6);
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+#radio-sports h5 {
+    margin: 0;
+    padding: 0;
+}
+.TEAMN, .LINE, .TEAM_ODDS, .OVER_ODDS {
+    margin-left: 5px;
+    DISPLAY: INLINE;
+}
+.OPPONENT, .VS_LINE, .VS_ODDS, .UNDER_ODDS {
+    margin-left: 5px;
+    DISPLAY: INLINE;
+}
