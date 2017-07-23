@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row sports-content">
-        <div class="col-sm-4 col-content" id="col-team">
+        <div class="col-sm-6 col-content" id="col-team">
             <div id="radio-sports">
                 <h5>Select Sports</h5>
             </div>
@@ -10,68 +10,100 @@
                 <thead>
                 <tr>
                     <th style="width: 3%; text-align: center">G No.</th>
-                    <th>Team</th>
-                    <th>Opponent</th>
-                    <th style="width: 3%; text-align: center">Sports</th>
+                    <th style="width: 30%;">Favorites</th>
+                    <th style="width: 4%; text-align: center">Line</th>
+                    <th>Total</th>
+                    <th style="width: 30%;">Opponent</th>
+                    <th style="width: 25%; text-align: center">Date/Time</th>
+                    {{--<th>Line</th>--}}
+                    <th style="width: 3%; text-align: center; display: none;">Sports</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($sched as $value)
-                    <tr>
+                    <tr data-id="{{ $value->TGAMENO }}" >
+                        {{--<input id="dataSport" type="hidden" value="{{ $value->SPORT }}">--}}
+                        <td>{{ $value->LINE < 0 ? $value->TGAMENO : $value->VSGAMENO }}</td>
+                        <td class="btnTeam {{ $value->LINE < 0 ? "TEAM" :"OPPONENT" }}">{{ $value->LINE < 0 ? $value->TEAM : $value->OPPONENT }}</td>
+                        <td>{{ $value->LINE < 0 ? $value->LINE : $value->VS_LINE }}</td>
+                        <td>{{ $value->TOTAL > 900 ? "NL" : $value->TOTAL }}</td>
+                        <td class="btnTeam {{ $value->VS_LINE < 0 ? "TEAM" :"OPPONENT" }}">{{ $value->VS_LINE < 0 ? $value->TEAM : $value->OPPONENT }}</td>
+                        <td>{{ $value->GAME_DATE }} / {{ $value->GAME_TIME }}</td>
+{{--                        <td>{{ $value->VS_LINE < 0 ? $value->LINE : $value->VS_LINE }}</td>--}}
+                        <td style="text-align: center; display: none;">{{ $value->SPORT }}</td>
+                    </tr>
+                @endforeach
+                @foreach($schedall as $key => $value)
+                    <tr data-id="{{ $value->TGAMENO }}" >
+                        {{--<input class="dataSport" type="hidden" value="{{ $value->SPORT }}">--}}
                         <td>{{ $value->TGAMENO }}</td>
-                        <td class="btnTeam" data-id="{{ $value->TEAM }}" >{{ $value->TEAM }}</td>
-                        <td>{{ $value->OPPONENT }}</td>
-                        <td style="text-align: center">{{ $value->SPORT }}</td>
+                        <td class="btnTeam2 TEAM">{{ $value->TEAM  }}</td>
+                        {{--<td>{{ $value->LINE > 900 ? "NL" : "PK" }}</td>--}}
+                        @if($value->SPORT == "PF" || $value->SPORT == "PB" || $value->SPORT == "CF" || $value->SPORT == "CB")
+                            <td>{{ $value->LINE == 0 ? "PK" : "NL" }}</td>
+                        @else
+                            <td>{{ $value->LINE == 0 ? 0 : "NL" }}</td>
+                        @endif
+{{--                        <td>{{ $value->SPORT == "PF" || "PB" || "CF" || "CB" && $value->LINE == 0 ? "PK" : $value->LINE }}</td>--}}
+                        <td>{{ $value->TOTAL > 900 ? "NL" : $value->TOTAL }}</td>
+                        <td class="btnTeam2 OPPONENT">{{ $value->OPPONENT }}</td>
+                        <td>{{ $value->GAME_DATE }} / {{ $value->GAME_TIME }}</td>
+                        {{--<td>{{ $value->VS_LINE > 900 ? "NL" : $value->LINE  }}</td>--}}
+                        <td style="text-align: center; display: none">{{ $value->SPORT }}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-4 col-content" id="col-content">
-            <form id='frmSched'>
-                <div class="form-body">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="TEAM" id="TEAM">
-                    {{--<div class="form-group">--}}
-                        {{--<input type='checkbox' class="chk-form" id='TEAMN' name='' value=''>--}}
-                        {{--<p class="TEAMN chk-p"></p>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<input type='checkbox' class="chk-form" id='OPPONENT' name='' value=''>--}}
-                        {{--<p class="OPPONENT chk-p"></p>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<input type='checkbox' class="chk-form" id='TGAMENO' name='' value=''>--}}
-                        {{--<p class="TGAMENO chk-p"></p>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<input type='checkbox' class="chk-form" id='GAME_TIME' name='' value=''>--}}
-                        {{--<p class="GAME_TIME chk-p"></p>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<input type='checkbox' class="chk-form" id='LINE' name='' value=''>--}}
-                        {{--<p class="LINE chk-p"></p>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<input type='checkbox' class="chk-form" id='VS_LINE' name='' value=''>--}}
-                        {{--<p class="VS_LINE chk-p"></p>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<input type='checkbox' class="chk-form" id='OVER_ODDS' name='' value=''>--}}
-                        {{--<p class="OVER_ODDS chk-p"></p>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<input type='checkbox' class="chk-form" id='UNDER_ODDS' name='' value=''>--}}
-                        {{--<p class="UNDER_ODDS chk-p"></p>--}}
-                    {{--</div>--}}
+        <div class="col-sm-6 col-content" id="col-content">
+            <div class="2nd-column">
+                <div id='divSched'>
+                    <div class="column-body">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="TGAMENO" id="TGAMENO">
+                        <input type="hidden" name="SPORT" id="SPORT">
+                        <div class="sched-column-content">
+
+                        </div>
+                    </div>
+                    <div class="column-footer">
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" placeholder="Amount" required id="amountID">
+                        </div>
+                        <div class="col-xs-7">
+                            <input type="button" class="btnBet btn btn-primary" id="btnStraight" value="Straight">
+                            <input type="button" class="btnBet btn btn-success" id="btnParlay" value="Parlay">
+                            <input type="button" class="btnBet btn btn-info" id="btnTeaser" value="Teaser">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-footer">
-                    <input type="button" class="btn btn-primary" value="Bet Type 1">
-                    <input type="button" class="btn btn-success" value="Bet Type 2">
-                    <input type="button" class="btn btn-info" value="Bet Type 3">
-                </div>
-            </form>
+            </div>
+            <hr>
+            <div class="3rd-column">
+                <form id="saveBet">
+                    <div class="form-body">
+                        <table id="tblConfirm" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Team</th>
+                                <th>Bet Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-footer buttonDiv">
+                        <input type="button" class=" btn btn-success" id="btnSaveBet" value="Submit">
+                        <input type="button" class=" btn btn-info" id="btnCancelBet" value="Cancel">
+                    </div>
+                </form>
+
+            </div>
+        {{--</div>--}}
+        {{--<div class="col-sm-3 col-content" id="col-bet">--}}
+
         </div>
-        <div class="col-sm-4 col-content" id="col-bet"></div>
     </div>
 </div>

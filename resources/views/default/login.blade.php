@@ -3,7 +3,7 @@
 <div class="login-page">
     <div class="form">
         <form class="login-form" id="frmLogin" method="post" action="login">
-            {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="text" name="username" placeholder="username"/>
             <input type="password" name="password" placeholder="password" />
             <input type="submit" id="submit" class="submit-button">

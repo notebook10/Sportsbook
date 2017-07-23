@@ -12,13 +12,15 @@
 */
 
 
-//Route::get('/','HomeController@index');
-//
-//Route::post('login','HomeController@login');
-//Route::get('logout','HomeController@logout');
+Route::get('/','HomeController@index');
+
+Route::post('login','HomeController@login');
+Route::get('logout','HomeController@logout');
 
 
-//Route::group(['middleware' => ['auth']], function (){
-    Route::get('/', 'HomeController@main');
+Route::group(['middleware' => ['auth']], function (){
+    Route::get('main', 'HomeController@main');
+    Route::get('customer', 'HomeController@customer');
+    Route::get('/autocomplete', 'HomeController@autocomplete');
     Route::match(array('get', 'post'),'/sportsbook/getSched', 'HomeController@getSched');
-//});
+});

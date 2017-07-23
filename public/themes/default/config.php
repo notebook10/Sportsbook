@@ -40,18 +40,23 @@ return array(
 		{
             $asset->add([
                 ['bootstrap-css', 'css/bootstrap/bootstrap.min.css'],
-                ['jquery-ui', 'css/jquery-ui.min.css'],
+                ['jquery-ui', 'css/jquery-ui.css'],
                 ['datatables', 'css/datatables.min.css'],
+                ['jquery-confirm', 'css/jquery-confirm.min.css'],
+
+
                 ['jquery', 'js/jquery-3.2.1.min.js'],
-                ['jquery-ui', 'js/jquery-ui.min.js'],
+                ['jquery-ui', 'js/jquery-ui.js'],
                 ['jquery-datatables', 'js/jquery.datatables.js'],
                 ['jquery-validate', 'js/jquery.validate.min.js'],
-                ['bootstrap-js', 'js/bootstrap/bootstrap.min.js']
+                ['bootstrap-js', 'js/bootstrap/bootstrap.min.js'],
+                ['jquery-confirm-js', 'js/jquery-confirm.min.js']
             ]);
 
             $asset->themePath()->add([
                 ['style', 'css/style.css'],
-                ['script', 'js/script.js']
+                ['script', 'js/script.js'],
+                ['player', 'js/player.js']
             ]);
 
 			// You may use elixir to concat styles and scripts.

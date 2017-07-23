@@ -5,7 +5,7 @@
     background: lightblue;
 }
 #col-bet {
-    background: darkolivegreen;
+    background: wheat;
 }
 .sports-content .col-content {
     height: 725px;
@@ -17,8 +17,17 @@
 div#tblTeam_length {
     display: none !important;
 }
-.btnTeam  {
+.btnTeam, .btnTeam2  {
     cursor: pointer;
+}
+#tblTeam .btnTeam:hover,
+#tblTeam .btnTeam2:hover{
+    background-color:#00724b ;
+    color:#ffffff;
+    text-shadow: 1px 2px #000000;
+    box-shadow: 0px 0px 10px #ff0000;
+    -webkit-box-shadow: 0px 0px 10px #ff0000;
+    -moz-box-shadow: 0px 0px 10px #ff0000;
 }
 #tblTeam {
     font-size: 11px;
@@ -31,22 +40,30 @@ div#tblTeam_length {
     display: inline;
 }
 
-.form-body {
-    background: rgba(255,255,255,0.6);
-    padding: 10px 25px;
-    border-radius: 20px;
-    height: 556px;
-    max-height: 556px;
+.column-body {
+    /*background: rgba(255,255,255,0.6);*/
+    /*padding: 10px 25px;*/
+    /*border-radius: 20px;*/
+    height: 285px;
+    max-height: 285px;
     overflow: auto;
 }
-.form-footer {
+.column-footer {
     background: rgba(255,255,255,0.5);
-    padding: 25px 35px;
+    padding: 10px;
     border-radius: 20px;
     margin-top: 30px;
     text-align: center;
     position: absolute;
-    bottom: 20px
+    bottom: 5px;
+}
+#divSched {
+    position: relative;
+    height:350px;
+}
+hr {
+    margin: 5px 0;
+    border-top: 4px solid #ffffff;
 }
 .form-group {
     /*margin-bottom: 15px;*/
@@ -88,7 +105,79 @@ div#radio-sports {
     margin-left: 5px;
     DISPLAY: INLINE;
 }
-.OPPONENT, .VS_LINE, .VS_ODDS, .UNDER_ODDS {
-    margin-left: 5px;
-    DISPLAY: INLINE;
+/*.OPPONENT, .VS_LINE, .VS_ODDS, .UNDER_ODDS {*/
+    /*margin-left: 5px;*/
+    /*DISPLAY: INLINE;*/
+/*}*/
+.thumbnails {
+    font-size: 11px;
+    background: rgba(255,255,255,0.6);
+    padding: 1px 0px;
+    /*border-radius: 20px;*/
+    margin-bottom: 5px;
+    position: relative;
+}
+.thumbnails h5 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+.remove-thumbnail {
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: red;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+    position: absolute;
+    right: 0px;
+    top: -3px;
+}
+#btnStraight, #btnParlay {
+    margin-right: 27px;
+}
+
+.thumbnails table tr td {
+    padding: 0 0 0px 10px;
+    vertical-align: middle;
+}
+input[type="checkbox"], input[type=radio] {
+    margin-top: 2px;
+    margin-left: -17px !important;
+}
+.table {
+    margin-bottom: 5px !important;
+}
+.thumbnails .table>thead>tr>th {
+    padding: 0 10px !important;
+    width: 25%;
+}
+#saveBet, .column-footer {
+    display: none;
+}
+#tblConfirm tr {
+    background: #ffffff;
+}
+.noDisplay {
+    display: none;
+    pointer-events:none;
+    cursor: default;
+}
+.NL {
+    display: none;
+    pointer-events:none;
+    cursor: default;
+}
+/*.checkbox-inline, .radio-inline {*/
+    /*cursor: default !important;*/
+/*}*/
+#saveBet .form-body {
+    max-height: 265px;
+    height: 265px;
+    overflow-y: scroll;
 }

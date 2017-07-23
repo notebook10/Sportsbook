@@ -6,7 +6,7 @@
         <meta name="keywords" content="@get('keywords')">
         <meta name="description" content="@get('description')">
         <meta name="author" content="@get('author')">
-    
+
         <title>@get('title')</title>
 
         @styles()

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
+use App\operator;
+use App\Player;
 use Illuminate\Http\Request;
 use App\User;
 use App\Sched;
@@ -9,64 +12,84 @@ use Auth;
 use Validator;
 use Theme;
 use Illuminate\Support\Facades\Redirect;
+use Input;
 
 class HomeController extends Controller
 {
-//    public function index(){
-//        if(Auth::check()){
-//            $user = Auth::user();
-//            $direct = User::checkusertype($user->id);
-//            return Redirect::to($direct);
-//        }else{
-//            return view('default/login');
-//        }
-//    }
-//    public function login(Request $request){
-//        $username = $request->input('username');
-//        $password = $request->input('password');
-//        $data = [
-//            'username' => $username,
-//            'password' => $password
-//        ];
-//        $rules = [
-//            'username' => 'required|min:2',
-//            'password' => 'required|min:2'
-//        ];
-//        $validator = Validator::make($data,$rules);
-//        if($validator->fails()){
-//            return Redirect::to('/');
-//        }else{
-//            if(Auth::attempt(['username' => $username, 'password' => $password])){
-//                return Redirect::to('/');
-//            }else{
-//                return Redirect::to('/')
-//                    ->withErrors([
-//                        'validate' => 'Wrong Email or Password!',
-//                    ]);
-//            }
-//        }
-//    }
-//
-//    public function logout(){
-//        Auth::logout();
-//        return Redirect::to('/');
-//    }
+    public function index(){
+        if(Auth::check()){
+            $user = Auth::user();
+            $direct = operator::checkusertype($user->OperatorID);
+            return Redirect::to($direct);
+        }else{
+            return view('default/login');
+        }
+    }
+    public function login(Request $request){
+        $username = $request->input('username');
+        $password = $request->input('password');
 
+        $data = [
+            'username' => $username,
+            'password' => $password
+        ];
+        $rules = [
+            'username' => 'required|min:2',
+            'password' => 'required|min:2'
+        ];
+        $validator = Validator::make($data,$rules);
+        if($validator->fails()){
+            return Redirect::to('/');
+        }else {
+            $user = operator::where('INITIALS', '=', $username)
+                ->where('PW', '=', $password)
+                ->first();
+            if ($user) {
+            Auth::login($user);
+                return Redirect::to('/');
+            } else {
+                return Redirect::to('/')
+                    ->withErrors([
+                        'validate' => 'Wrong Username or Password!',
+                    ]);
+            }
+        }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return Redirect::to('/');
+    }
+
+//    public function main(){
+//        $sched = new Sched();
+//        $allTeam = $sched->getTeamFavorite();
+//        $dataArray = array(
+//            'sched' => $allTeam,
+//        );
+//
+//        $theme = Theme::uses('default')->layout('layout')->setTitle('Main');
+//        return $theme->of('sportsbook.main',$dataArray)->render();
+//    }
     public function main(){
         $sched = new Sched();
-        $allTeam = $sched->getAllTeam();
+        $allTeam = $sched->getTeamFavorite();
+        $all = $sched->getall();
         $dataArray = array(
-          'sched' => $allTeam
+            'sched' => $allTeam,
+            'schedall' => $all,
         );
 
         $theme = Theme::uses('default')->layout('layout')->setTitle('Main');
         return $theme->of('sportsbook.main',$dataArray)->render();
     }
 
+
     public function getSched(Request $request){
-        $id = $request->input('TEAM');
+        $TGAMENO = $request->input('TGAMENO');
+        $SPORT = $request->input('SPORT');
         $sched = new Sched();
-        $row = $sched->getSchedByTeam($id);
+        $row = $sched->getSchedByTeamNo($TGAMENO, $SPORT);
         $dataArray = [
             'TEAM' => $row->TEAM,
             'OPPONENT' => $row->OPPONENT,
@@ -74,24 +97,66 @@ class HomeController extends Controller
             'GAME_TIME' => $row->GAME_TIME,
             'LINE' => $row->LINE,
             'VS_LINE' => $row->VS_LINE,
-//            'VSGAMENO' => $row->VSGAMENO,
-//            'TEAM_FULL' => $row->TEAM_FULL,
-//            'VS_FULL' => $row->VS_FULL,
+            'VSGAMENO' => $row->VSGAMENO,
+            'TOTAL' => $row->TOTAL,
+            'GAME_DATE' => $row->GAME_DATE,
             'OVER_ODDS' => $row->OVER_ODDS,
             'UNDER_ODDS' => $row->UNDER_ODDS,
             'TEAM_ODDS' => $row->TEAM_ODDS,
             'VS_ODDS' => $row->VS_ODDS,
-            'TGAMENO' => $row->TGAMENO,
-            'OPPONENT' => $row->OPPONENT
+            'OPPONENT' => $row->OPPONENT,
+            'SPORT' => $row->SPORT
 
         ];
         return $dataArray;
     }
+
+    public function customer(){
+        $theme = Theme::uses('default')->layout('layout')->setTitle('Main');
+        return $theme->of('sportsbook.customerLogin')->render();
+    }
+    public function autocomplete(Request $request){
+        $term =  $request->input('term');
+        $cust = new Player();
+        $results = array();
+
+        $queries = $cust->getAllPlayer($term);
+
+        foreach ($queries as $query)
+        {
+            $results[] = [ 'id' => $query->custid, 'value' => $query->name ];
+        }
+        if(count($results))
+            return $results;
+        else
+            return ['value'=>'No Result Found','id'=>''];
+//        return response()->json($results);
+    }
+    public function loginCustomer(Request $request){
+//       $customerName = $request->input('cname');
+//        if (Customer::where('name', '=', $request->$customerName)->first()) {
+//            return 1;
+//        } else {
+//            return 2;
+//        }
+    }
+//        $cname = $request->input('cname');
+//        $data =array(
+//          $cname => 'name'
+//        );
+//        $custname = Customer::where('name', '=', $cname)
+//            ->first();
+//        if ($custname) {
+////            Auth::login($custname);
+//            return Redirect::to('/main');
+//        } else {
+//            return Redirect::to('/customer')
+//                ->withErrors([
+//                    'validate' => 'Wrong Username or Password!',
+//                ]);
+//        }
+//    }
 }
-
-
-
-
 
 
 
