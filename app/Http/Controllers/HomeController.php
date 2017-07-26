@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Betcur;
+use App\Betpast;
 use App\Customer;
 use App\operator;
 use App\Player;
@@ -111,10 +113,10 @@ class HomeController extends Controller
         return $dataArray;
     }
 
-    public function customer(){
-        $theme = Theme::uses('default')->layout('layout')->setTitle('Main');
-        return $theme->of('sportsbook.customerLogin')->render();
-    }
+//    public function customer(){
+//        $theme = Theme::uses('default')->layout('layout')->setTitle('Main');
+//        return $theme->of('sportsbook.customerLogin')->render();
+//    }
     public function autocomplete(Request $request){
         $term =  $request->input('term');
         $cust = new Player();
@@ -124,38 +126,39 @@ class HomeController extends Controller
 
         foreach ($queries as $query)
         {
-            $results[] = [ 'id' => $query->custid, 'value' => $query->name ];
+            $results[] = [
+                'id' => $query->custid,
+                'value' => $query->name,
+                'password' => $query->password ,
+                'balance' => $query->balance
+            ];
         }
         if(count($results))
             return $results;
         else
             return ['value'=>'No Result Found','id'=>''];
-//        return response()->json($results);
     }
-    public function loginCustomer(Request $request){
-//       $customerName = $request->input('cname');
-//        if (Customer::where('name', '=', $request->$customerName)->first()) {
-//            return 1;
-//        } else {
-//            return 2;
-//        }
+
+    public function viewBets(Request $request){
+        $player = $request->input('player');
+        $betcur = new Betcur();
+        $row = $betcur->getAll($player);
+        $dataArray = [
+            'alldata' => $row
+        ];
+        return $dataArray;
     }
-//        $cname = $request->input('cname');
-//        $data =array(
-//          $cname => 'name'
-//        );
-//        $custname = Customer::where('name', '=', $cname)
-//            ->first();
-//        if ($custname) {
-////            Auth::login($custname);
-//            return Redirect::to('/main');
-//        } else {
-//            return Redirect::to('/customer')
-//                ->withErrors([
-//                    'validate' => 'Wrong Username or Password!',
-//                ]);
-//        }
-//    }
+
+    public function viewPastBets(Request $request){
+        $player = $request->input('player');
+        $betpast = new Betpast();
+        $row = $betpast->getAll($player);
+        $dataArray = [
+          'allpast' => $row
+        ];
+        return $dataArray;
+    }
+
 }
 
 

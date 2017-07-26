@@ -14,4 +14,10 @@ class Player extends Model
             ->take(10)
             ->get();
     }
+//    public function  getOnePlayer($custid, $name){
+//        return DB::table($this->table)
+//            ->where('custid', $custid)
+//            ->where('name', $name)
+//            ->first();
+//    }
 }

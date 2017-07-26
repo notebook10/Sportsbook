@@ -1,0 +1,108 @@
+section.sec-player {
+    text-align: center;
+    width: 300px;
+    margin: auto;
+}
+button#btnSubmitPlayer {
+    margin-top: 10px;
+    /*height: 30px;*/
+    /*padding: 4px !important;*/
+}
+#custName {
+    /*height: 28px;*/
+}
+.login-panel-body {
+    /*padding: 10px !important;*/
+}
+.sports-content, #divLoginDisplay {
+    display: none;
+}
+
+#PcustName, .PcustName {
+    display: inline;
+}
+
+#Ppassword, .Ppassword {
+    display: inline;
+}
+
+#Pbalance, .Pbalance {
+    display: inline;
+}
+
+ul#divLoginDisplay li {
+    margin-right: 25px;
+}
+
+ul#divLoginDisplay .dataClass {
+    top: 27px;
+}
+
+ul#divLoginDisplay {
+    color: #ffffff;
+}
+
+#viewCurrent, #viewPast, .pLogout {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 6px !important;
+    cursor: pointer;
+}
+
+#viewCurrent:after, #viewPast:after, .pLogout:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    background: transparent;
+    transition: width .5s ease, background-color .5s ease;
+}
+
+#viewCurrent:hover:after, #viewPast:hover:after {
+    width: 100%;
+    background: #ffffff;
+}
+
+.pLogout:hover {
+    color: red;
+}
+.pLogout:hover:after {
+    width: 100%;
+    background: red;
+    color: red;
+}
+
+div#modalCurrent .modal-content,
+div#modalPast .modal-content {
+    width: 900px;
+}
+
+div#modalCurrent .modal-body,
+div#modalPast .modal-body {
+    max-height: 650px;
+    height: 650px;
+    overflow: auto;
+}
+.modal-title {
+    text-align: center;
+}
+.modal-header .close {
+    color: red !important;
+    background: white;
+    width: 20px;
+    border-radius: 13px;
+    position: absolute;
+    right: 16px;
+}
+.modal-header {
+    background: #00724b;
+    color: white;
+    text-align: center;
+}
+.noData {
+    text-align: center;
+    margin-top: 110px;
+}

@@ -31,6 +31,7 @@ div#tblTeam_length {
 }
 #tblTeam {
     font-size: 11px;
+    width: 100% !important;
 }
 #tblTeam th {
     text-align: center;
@@ -180,4 +181,13 @@ input[type="checkbox"], input[type=radio] {
     max-height: 265px;
     height: 265px;
     overflow-y: scroll;
+}
+
+.navbar-nav>li>a {
+    padding-top: 27px;
+    padding-bottom: 27px;
+}
+.navbar {
+    min-height: 75px !important;
+    margin-bottom: 50px;
 }

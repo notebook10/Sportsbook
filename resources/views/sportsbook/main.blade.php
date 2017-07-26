@@ -1,6 +1,8 @@
 
 
 <div class="container">
+
+    @include('sportsbook/customerLogin')
     <div class="row sports-content">
         <div class="col-sm-6 col-content" id="col-team">
             <div id="radio-sports">

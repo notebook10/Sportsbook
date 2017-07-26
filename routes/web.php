@@ -23,4 +23,7 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('customer', 'HomeController@customer');
     Route::get('/autocomplete', 'HomeController@autocomplete');
     Route::match(array('get', 'post'),'/sportsbook/getSched', 'HomeController@getSched');
+    Route::match(array('get', 'post'),'/viewPendingBets', 'HomeController@viewPendingBets');
+    Route::match(array('get', 'post'),'/viewBets', 'HomeController@viewBets');
+    Route::match(array('get', 'post'),'/viewPastBets', 'HomeController@viewPastBets');
 });

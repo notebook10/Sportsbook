@@ -55,6 +55,7 @@ return array(
 
             $asset->themePath()->add([
                 ['style', 'css/style.css'],
+                ['player', 'css/player.css'],
                 ['script', 'js/script.js'],
                 ['player', 'js/player.js']
             ]);
