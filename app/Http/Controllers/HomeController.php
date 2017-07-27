@@ -63,16 +63,6 @@ class HomeController extends Controller
         return Redirect::to('/');
     }
 
-//    public function main(){
-//        $sched = new Sched();
-//        $allTeam = $sched->getTeamFavorite();
-//        $dataArray = array(
-//            'sched' => $allTeam,
-//        );
-//
-//        $theme = Theme::uses('default')->layout('layout')->setTitle('Main');
-//        return $theme->of('sportsbook.main',$dataArray)->render();
-//    }
     public function main(){
         $sched = new Sched();
         $allTeam = $sched->getTeamFavorite();
@@ -113,10 +103,6 @@ class HomeController extends Controller
         return $dataArray;
     }
 
-//    public function customer(){
-//        $theme = Theme::uses('default')->layout('layout')->setTitle('Main');
-//        return $theme->of('sportsbook.customerLogin')->render();
-//    }
     public function autocomplete(Request $request){
         $term =  $request->input('term');
         $cust = new Player();

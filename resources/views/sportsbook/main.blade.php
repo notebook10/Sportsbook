@@ -17,40 +17,33 @@
                     <th>Total</th>
                     <th style="width: 30%;">Opponent</th>
                     <th style="width: 25%; text-align: center">Date/Time</th>
-                    {{--<th>Line</th>--}}
                     <th style="width: 3%; text-align: center; display: none;">Sports</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($sched as $value)
                     <tr data-id="{{ $value->TGAMENO }}" >
-                        {{--<input id="dataSport" type="hidden" value="{{ $value->SPORT }}">--}}
                         <td>{{ $value->LINE < 0 ? $value->TGAMENO : $value->VSGAMENO }}</td>
                         <td class="btnTeam {{ $value->LINE < 0 ? "TEAM" :"OPPONENT" }}">{{ $value->LINE < 0 ? $value->TEAM : $value->OPPONENT }}</td>
                         <td>{{ $value->LINE < 0 ? $value->LINE : $value->VS_LINE }}</td>
                         <td>{{ $value->TOTAL > 900 ? "NL" : $value->TOTAL }}</td>
                         <td class="btnTeam {{ $value->VS_LINE < 0 ? "TEAM" :"OPPONENT" }}">{{ $value->VS_LINE < 0 ? $value->TEAM : $value->OPPONENT }}</td>
                         <td>{{ $value->GAME_DATE }} / {{ $value->GAME_TIME }}</td>
-{{--                        <td>{{ $value->VS_LINE < 0 ? $value->LINE : $value->VS_LINE }}</td>--}}
                         <td style="text-align: center; display: none;">{{ $value->SPORT }}</td>
                     </tr>
                 @endforeach
                 @foreach($schedall as $key => $value)
                     <tr data-id="{{ $value->TGAMENO }}" >
-                        {{--<input class="dataSport" type="hidden" value="{{ $value->SPORT }}">--}}
                         <td>{{ $value->TGAMENO }}</td>
                         <td class="btnTeam2 TEAM">{{ $value->TEAM  }}</td>
-                        {{--<td>{{ $value->LINE > 900 ? "NL" : "PK" }}</td>--}}
                         @if($value->SPORT == "PF" || $value->SPORT == "PB" || $value->SPORT == "CF" || $value->SPORT == "CB")
                             <td>{{ $value->LINE == 0 ? "PK" : "NL" }}</td>
                         @else
                             <td>{{ $value->LINE == 0 ? 0 : "NL" }}</td>
                         @endif
-{{--                        <td>{{ $value->SPORT == "PF" || "PB" || "CF" || "CB" && $value->LINE == 0 ? "PK" : $value->LINE }}</td>--}}
                         <td>{{ $value->TOTAL > 900 ? "NL" : $value->TOTAL }}</td>
                         <td class="btnTeam2 OPPONENT">{{ $value->OPPONENT }}</td>
                         <td>{{ $value->GAME_DATE }} / {{ $value->GAME_TIME }}</td>
-                        {{--<td>{{ $value->VS_LINE > 900 ? "NL" : $value->LINE  }}</td>--}}
                         <td style="text-align: center; display: none">{{ $value->SPORT }}</td>
                     </tr>
                 @endforeach
@@ -64,6 +57,16 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="TGAMENO" id="TGAMENO">
                         <input type="hidden" name="SPORT" id="SPORT">
+                        <table id="tblSColumn" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Team</th>
+                                <th>Line / Odds</th>
+                                <th>Over Total Odds</th>
+                                <th>Under Total Odds</th>
+                            </tr>
+                            </thead>
+                        </table>
                         <div class="sched-column-content">
 
                         </div>
@@ -87,8 +90,11 @@
                         <table id="tblConfirm" class="table table-bordered table-striped">
                             <thead>
                             <tr>
+                                <th>Bet Type</th>
+                                <th>Sports</th>
                                 <th>Team</th>
-                                <th>Bet Amount</th>
+                                <th>Spread</th>
+                                <th>Payoff</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -103,8 +109,6 @@
                 </form>
 
             </div>
-        {{--</div>--}}
-        {{--<div class="col-sm-3 col-content" id="col-bet">--}}
 
         </div>
     </div>

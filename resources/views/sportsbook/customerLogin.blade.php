@@ -74,7 +74,7 @@
                         <th>Team</th>
                         <th>Line</th>
                         <th>Odds</th>
-                        <th>Result</th>
+                        <th>Amount</th>
                         <th>Game Date</th>
                         <th>Bet No.</th>
                     </tr>

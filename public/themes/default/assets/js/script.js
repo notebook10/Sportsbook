@@ -74,19 +74,19 @@ $('document').ready(function(){
                         '<div class="thumbnails" id="'+ data['TGAMENO'] + data['SPORT'] +'">' +
                         '<button type="button" class="remove-thumbnail">' + '&times;' + '</button>' +
                         '<table class="table table-bordered ">' +
-                        '<thead>' +
-                        '<tr>' +
-                        '<th>' + 'Team' + '</th>' +
-                        '<th>' + 'Line - Odds' + '</th>' +
-                        // '<th>' + 'Total' + '</th>' +
-                        '<th>' + 'Over Total Odds' + '</th>' +
-                        '<th>' + 'Under Total Odds' + '</th>' +
-                        '</tr>' +
-                        '</thead>' +
+                        // '<thead>' +
+                        // '<tr>' +
+                        // '<th>' + 'Team' + '</th>' +
+                        // '<th>' + 'Line - Odds' + '</th>' +
+                        // // '<th>' + 'Total' + '</th>' +
+                        // '<th>' + 'Over Total Odds' + '</th>' +
+                        // '<th>' + 'Under Total Odds' + '</th>' +
+                        // '</tr>' +
+                        // '</thead>' +
                         '<tbody>' +
                         '<tr>' +
                         '<td value="'+ data['SPORT'] + '">' + data['TEAM'] + '</td>' +
-                        '<td>' + '<label class="checkbox-inline">' + '<input type="hidden" name="sportsType" value="'+ data['SPORT'] +'"> ' + '<input class="'+dLINE+'" type="checkbox" value="' + data['TEAM'] + ' = ' + dLINE + dTEAMODDS + '">' + dLINE + dTEAMODDS + '</label>' + '</td>' +
+                        '<td>' + '<label class="checkbox-inline">' + '<input type="hidden" name="sportsType" value="'+ data['SPORT'] +'"> ' + '<input type="hidden" name="sportsTeam" value="'+ data['TEAM'] +'"> ' + '<input class="'+dLINE+'" type="checkbox" value="' + dLINE + dTEAMODDS + '">' + dLINE + dTEAMODDS + '</label>' + '</td>' +
                         // '<td>' + '<label class="checkbox-inline">' + '<input type="checkbox" value="">' + data['TOTAL'] + '</label></p>' + '</td>' +
                         '<td>' + '<label class="radio-inline">' + '<input class="o-odds '+noDisplay+'" name="total-odds-' + data['TGAMENO'] + '" type="radio" value="' + "O " + dTOTAL + '">' + "O " + dTOTAL + '</label>' + '</td>' +
                         '<td>' + '<label class="radio-inline">' + '<input class="u-odds '+noDisplay+'" name="total-odds-' + data['TGAMENO'] + '" type="radio" value="' + "U " + dTOTAL + '">' + "U " + dTOTAL + '</label>' + '</td>' +
@@ -142,19 +142,20 @@ $('document').ready(function(){
                             '<div class="thumbnails" id="'+ data['TGAMENO'] + data['SPORT'] +'">' +
                             '<button type="button" class="remove-thumbnail">' + '&times;' + '</button>' +
                             '<table class="table table-bordered ">' +
-                            '<thead>' +
-                            '<tr>' +
-                            '<th>' + 'Team' + '</th>' +
-                            '<th>' + 'Line - Odds' + '</th>' +
-                            // '<th>' + 'Total' + '</th>' +
-                            '<th>' + 'Over Total Odds' + '</th>' +
-                            '<th>' + 'Under Total Odds' + '</th>' +
-                            '</tr>' +
-                            '</thead>' +
+                            // '<thead>' +
+                            // '<tr>' +
+                            // '<th>' + 'Team' + '</th>' +
+                            // '<th>' + 'Line - Odds' + '</th>' +
+                            // // '<th>' + 'Total' + '</th>' +
+                            // '<th>' + 'Over Total Odds' + '</th>' +
+                            // '<th>' + 'Under Total Odds' + '</th>' +
+                            // '</tr>' +
+                            // '</thead>' +
                             '<tbody>' +
                             '<tr>' +
                             '<td value="'+ data['SPORT'] + '">' + data['OPPONENT'] + '</td>' +
-                            '<td>' + '<label class="checkbox-inline">' + '<input type="hidden" name="sportsType" value="'+ data['SPORT'] +'"> ' + '<input  class="'+dLINE+'" type="checkbox" value="' + data['OPPONENT'] + ' = '+ dLINE + dTEAMODDS + '">'+ dLINE + dTEAMODDS + '</label>' + '</td>' +
+                            // '<td>' + '<label class="checkbox-inline">' + '<input type="hidden" name="sportsType" value="'+ data['SPORT'] +'"> ' + '<input  class="'+dLINE+'" type="checkbox" value="' + data['OPPONENT'] + ' , '+ dLINE + dTEAMODDS + '">'+ dLINE + dTEAMODDS + '</label>' + '</td>' +
+                            '<td>' + '<label class="checkbox-inline">' + '<input type="hidden" name="sportsType" value="'+ data['SPORT'] +'"> ' + '<input type="hidden" name="sportsTeam" value="'+ data['OPPONENT'] +'"> ' + '<input class="'+dLINE+'" type="checkbox" value="' + dLINE + dTEAMODDS + '">' + dLINE + dTEAMODDS + '</label>' + '</td>' +
                             // '<td>' + '<label class="checkbox-inline">' + '<input type="checkbox" value="">' + data['TOTAL'] + '</label></p>' + '</td>' +
                             '<td>' + '<label class="radio-inline">' + '<input class="o-odds '+noDisplay+'" name="total-odds-' + data['VSGAMENO'] + '" type="radio" value="' + "O " + dTOTAL + '">' + "O " + dTOTAL + '</label>' + '</td>' +
                             '<td>' + '<label class="radio-inline">' + '<input class="u-odds '+noDisplay+'" name="total-odds-' + data['VSGAMENO'] + '" type="radio" value="' + "U " + dTOTAL + '">' + "U " + dTOTAL+ '</label>' + '</td>' +
@@ -182,28 +183,31 @@ $('document').ready(function(){
      $('.btnBet').on('click', function(){
          var betType = $(this).val();
          var amount = $('#amountID').val();
-         if ($('.thumbnails input:radio:checked').length > 0 || $('.thumbnails input:checkbox:checked').length > 0){
+         if ($('.thumbnails input:checked').length > 0){
              if($('#amountID').val() !== ""){
                  var values = [];
-                 if($('.thumbnails input:radio:checked').length == 0 && $('.thumbnails input:checkbox:checked').length > 0){
+                 var values2 = [];
+                 if($('.thumbnails input:checkbox:checked').length > 0 && $('.thumbnails input:radio:checked').length == 0){
                      $("input:checkbox:checked").each(function(){
                          row = $(this).closest("tr");
                          values.push({
-                             selectedTeam : $(this).val() || " ",
+                             lineOdds : $(this).val() || " ",
+                             sportsTeam  : $(row).find("input[name=sportsTeam]").val(),
                              sportsType  : $(row).find("input[name=sportsType]").val(),
-                             radio       :  $(row).find('input[type=radio]:checked').val() || " "
+                             // radio       :  $(row).find('input[type=radio]:checked').val() || " "
                          });
                      });
                      console.log(values);
                      var list = "";
                      $.each(values, function (index, val) {
-                         list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.selectedTeam +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
+                         list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.lineOdds +"<td>"+ amount +"</td>"+"</tr>";
                      });
-                 } else if($('.thumbnails input:radio:checked').length > 0 && $('.thumbnails input:checkbox:checked').length == 0) {
+                 } else if($('.thumbnails input:radio:checked').length > 0 && $('.thumbnails input:checkbox:checked').length == 0 ) {
                      $("input:radio:checked").each(function(){
                          row = $(this).closest("tr");
                          values.push({
-                             selectedTeam : $(this).val() || " ",
+                             // selectedTeam : $(this).val() || " ",
+                             sportsTeam  : $(row).find("input[name=sportsTeam]").val(),
                              sportsType  : $(row).find("input[name=sportsType]").val(),
                              radio       :  $(row).find('input[type=radio]:checked').val() || " "
                          });
@@ -211,25 +215,38 @@ $('document').ready(function(){
                      console.log(values);
                      var list = "";
                      $.each(values, function (index, val) {
-                         list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.radio +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
+                         // list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.radio +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
+                         list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.radio +"<td>"+ amount +"</td>"+"</tr>";
                      });
-                 } else if($('.thumbnails input:radio:checked').length > 0 && $('.thumbnails input:checkbox:checked').length > 0) {
-                     $("input:checked").each(function(){
+                 } else if ($('.thumbnails input:radio:checked').length > 0 && $('.thumbnails input:checkbox:checked').length > 0 ) {
+                     $("input:checkbox:checked").each(function(){
                          row = $(this).closest("tr");
                          values.push({
-                             selectedTeam : $(this).val() || " ",
+                             lineOdds : $(this).val() || " ",
                              sportsType  : $(row).find("input[name=sportsType]").val(),
+                             sportsTeam  : $(row).find("input[name=sportsTeam]").val(),
+                             // radio       :  $(row).find('input[type=radio]:checked').val() || " "
+                         });
+                     });
+                     $("input:radio:checked").each(function(){
+                         row = $(this).closest("tr");
+                         values2.push({
+                             // selectedTeam : $(this).val() || " ",
+                             sportsType  : $(row).find("input[name=sportsType]").val(),
+                             sportsTeam  : $(row).find("input[name=sportsTeam]").val(),
                              radio       :  $(row).find('input[type=radio]:checked').val() || " "
                          });
                      });
+                     console.log(values);
+                     console.log(values2);
+                     var list = "";
                      $.each(values, function (index, val) {
-                         var dSame = "";
-                         if(val.selectedTeam == val.radio){
-                             dSame = "";
-                         }else{
-                             dSame = ' , ' + val.selectedTeam;
-                         }
-                        list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType + dSame + ' , ' + val.radio +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
+                         // list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.selectedTeam +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
+                         list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.lineOdds +"<td>"+ amount +"</td>"+"</tr>";
+                     });
+                     $.each(values2, function (index, val) {
+                         // list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.radio +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
+                         list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.radio +"<td>"+ amount +"</td>"+"</tr>";
                      });
                  }
                  $('#saveBet').show();

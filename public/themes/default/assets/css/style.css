@@ -111,11 +111,11 @@ div#radio-sports {
     /*DISPLAY: INLINE;*/
 /*}*/
 .thumbnails {
-    font-size: 11px;
+    font-size: 14px;
     background: rgba(255,255,255,0.6);
     padding: 1px 0px;
     /*border-radius: 20px;*/
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
     position: relative;
 }
 .thumbnails h5 {
@@ -136,8 +136,8 @@ div#radio-sports {
     filter: alpha(opacity=20);
     opacity: .2;
     position: absolute;
-    right: 0px;
-    top: -3px;
+    right: 5px;
+    top: 0px;
 }
 #btnStraight, #btnParlay {
     margin-right: 27px;
@@ -148,11 +148,11 @@ div#radio-sports {
     vertical-align: middle;
 }
 input[type="checkbox"], input[type=radio] {
-    margin-top: 2px;
+    margin-top: 4px;
     margin-left: -17px !important;
 }
 .table {
-    margin-bottom: 5px !important;
+    margin-bottom: 10px;
 }
 .thumbnails .table>thead>tr>th {
     padding: 0 10px !important;
@@ -190,4 +190,12 @@ input[type="checkbox"], input[type=radio] {
 .navbar {
     min-height: 75px !important;
     margin-bottom: 50px;
+}
+
+#divSched tbody tr td,
+#divSched table tr th{
+    width: 25%;
+}
+table#tblSColumn {
+    margin-bottom: 0px;
 }
