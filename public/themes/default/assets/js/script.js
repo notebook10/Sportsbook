@@ -51,7 +51,7 @@ $('document').ready(function(){
                     if(data['TEAM_ODDS'] == -110){
                         dTEAMODDS = ""
                     } else {
-                        dTEAMODDS = ','+ data['TEAM_ODDS'];
+                        dTEAMODDS = ' , ' + data['TEAM_ODDS'];
                     }
                     if(data['TOTAL'] > 900){
                         dTOTAL = "NL";
@@ -86,7 +86,7 @@ $('document').ready(function(){
                         '<tbody>' +
                         '<tr>' +
                         '<td value="'+ data['SPORT'] + '">' + data['TEAM'] + '</td>' +
-                        '<td>' + '<label class="checkbox-inline">' + '<input type="hidden" name="sportsType" value="'+ data['SPORT'] +'"> ' + '<input type="hidden" name="sportsTeam" value="'+ data['TEAM'] +'"> ' + '<input class="'+dLINE+'" type="checkbox" value="' + dLINE + dTEAMODDS + '">' + dLINE + dTEAMODDS + '</label>' + '</td>' +
+                        '<td>' + '<label class="checkbox-inline">' + '<input type="hidden" name="sportsType" value="'+ data['SPORT'] +'"> ' + '<input type="hidden" name="sportsTeam" value="'+ data['TEAM'] +'"> ' + '<input type="hidden" name="dLine" value="'+dLINE+'"> ' + '<input class="'+dLINE+'" type="checkbox" value="' + dTEAMODDS + '">' + dLINE + dTEAMODDS + '</label>' + '</td>' +
                         // '<td>' + '<label class="checkbox-inline">' + '<input type="checkbox" value="">' + data['TOTAL'] + '</label></p>' + '</td>' +
                         '<td>' + '<label class="radio-inline">' + '<input class="o-odds '+noDisplay+'" name="total-odds-' + data['TGAMENO'] + '" type="radio" value="' + "O " + dTOTAL + '">' + "O " + dTOTAL + '</label>' + '</td>' +
                         '<td>' + '<label class="radio-inline">' + '<input class="u-odds '+noDisplay+'" name="total-odds-' + data['TGAMENO'] + '" type="radio" value="' + "U " + dTOTAL + '">' + "U " + dTOTAL + '</label>' + '</td>' +
@@ -119,7 +119,7 @@ $('document').ready(function(){
                     if(data['VS_ODDS'] == -110){
                         dTEAMODDS = ""
                     } else {
-                        dTEAMODDS = ','+ data['VS_ODDS'];
+                        dTEAMODDS = ' , ' + data['VS_ODDS'];
                     }
                     if(data['TOTAL'] > 900){
                         dTOTAL = "NL";
@@ -155,7 +155,7 @@ $('document').ready(function(){
                             '<tr>' +
                             '<td value="'+ data['SPORT'] + '">' + data['OPPONENT'] + '</td>' +
                             // '<td>' + '<label class="checkbox-inline">' + '<input type="hidden" name="sportsType" value="'+ data['SPORT'] +'"> ' + '<input  class="'+dLINE+'" type="checkbox" value="' + data['OPPONENT'] + ' , '+ dLINE + dTEAMODDS + '">'+ dLINE + dTEAMODDS + '</label>' + '</td>' +
-                            '<td>' + '<label class="checkbox-inline">' + '<input type="hidden" name="sportsType" value="'+ data['SPORT'] +'"> ' + '<input type="hidden" name="sportsTeam" value="'+ data['OPPONENT'] +'"> ' + '<input class="'+dLINE+'" type="checkbox" value="' + dLINE + dTEAMODDS + '">' + dLINE + dTEAMODDS + '</label>' + '</td>' +
+                            '<td>' + '<label class="checkbox-inline">' + '<input type="hidden" name="sportsType" value="'+ data['SPORT'] +'"> ' + '<input type="hidden" name="sportsTeam" value="'+ data['OPPONENT'] +'"> ' + '<input type="hidden" name="dLine" value="'+dLINE+'"> ' + '<input class="'+dLINE+'" type="checkbox" value="' + dTEAMODDS + '">' + dLINE + dTEAMODDS + '</label>' + '</td>' +
                             // '<td>' + '<label class="checkbox-inline">' + '<input type="checkbox" value="">' + data['TOTAL'] + '</label></p>' + '</td>' +
                             '<td>' + '<label class="radio-inline">' + '<input class="o-odds '+noDisplay+'" name="total-odds-' + data['VSGAMENO'] + '" type="radio" value="' + "O " + dTOTAL + '">' + "O " + dTOTAL + '</label>' + '</td>' +
                             '<td>' + '<label class="radio-inline">' + '<input class="u-odds '+noDisplay+'" name="total-odds-' + data['VSGAMENO'] + '" type="radio" value="' + "U " + dTOTAL + '">' + "U " + dTOTAL+ '</label>' + '</td>' +
@@ -179,6 +179,15 @@ $('document').ready(function(){
         thisDiv.remove();
         hideShow();
     })
+    $('body').delegate('.remove-bet', 'click', function () {
+        // var betData = $("#tblConfirm tbody tr.parlayTR:first td:last").html();
+        var thisDiv = $(this).parent().parent();
+        thisDiv.remove();
+        hideShow();
+        // $("#tblConfirm tbody tr.parlayTR:first td:last").removeClass('hidenAmt').html(betData);
+        // $("#tblConfirm tbody tr.parlayTR:first td:first").removeClass('hidenbetType').html('Parlay');
+        // $('table#tblConfirm > tbody > tr.parlayTR').not(':first').find('.hidenAmt').html('<button type="button" class="remove-bet">' + '&times;' + '</button>');
+    });
 
      $('.btnBet').on('click', function(){
          var betType = $(this).val();
@@ -191,17 +200,37 @@ $('document').ready(function(){
                      $("input:checkbox:checked").each(function(){
                          row = $(this).closest("tr");
                          values.push({
-                             lineOdds : $(this).val() || " ",
+                             dOdds : $(this).val() || " ",
+                             dLine  : $(row).find("input[name=dLine]").val(),
                              sportsTeam  : $(row).find("input[name=sportsTeam]").val(),
                              sportsType  : $(row).find("input[name=sportsType]").val(),
                              // radio       :  $(row).find('input[type=radio]:checked').val() || " "
                          });
                      });
                      console.log(values);
+                     var firstlist = "";
                      var list = "";
-                     $.each(values, function (index, val) {
-                         list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.lineOdds +"<td>"+ amount +"</td>"+"</tr>";
-                     });
+                     if(betType == "Parlay"){
+                         if($("input:checked").length > 1 && $("input:checked").length < 7){
+                             firstlist +="<tr class='betSelect'>"+"<td>"+ betType+"</td>"+"<td>"+ values[0].sportsType +"</td>"+"<td>"+ values[0].sportsTeam +"</td>"+"<td>"+ values[0].dLine + values[0].dOdds +"<td>"+ amount + '<button type="button" class="remove-bet">' + '&times;' + '</button>' + "</td>"+"</tr>";
+                             $.each(values.slice(1), function (index, val) {
+                                 list +="<tr class='betSelect parlayTR'>"+"<td class='hidenbetType'>"+ "" +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.dLine + val.dOdds +"<td class='hidenAmt'>"+ "" +"</td>"+"</tr>";
+                             });
+                             $('#saveBet').show();
+                         } else {
+                             $.alert({
+                                 title: 'Error!',
+                                 content: 'Please select 2 to 6 teams!',
+                             });
+                         }
+
+                     } else {
+                         $.each(values, function (index, val) {
+                             list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.dLine + val.dOdds +"<td>"+ amount +'<button type="button" class="remove-bet">' + '&times;' + '</button>' +"</td>"+"</tr>";
+                         });
+                         $('#saveBet').show();
+                     }
+
                  } else if($('.thumbnails input:radio:checked').length > 0 && $('.thumbnails input:checkbox:checked').length == 0 ) {
                      $("input:radio:checked").each(function(){
                          row = $(this).closest("tr");
@@ -213,16 +242,35 @@ $('document').ready(function(){
                          });
                      });
                      console.log(values);
+                     var firstlist = "";
                      var list = "";
-                     $.each(values, function (index, val) {
-                         // list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.radio +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
-                         list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.radio +"<td>"+ amount +"</td>"+"</tr>";
-                     });
+                     if(betType == "Parlay"){
+                         if($("input:checked").length > 1 && $("input:checked").length < 7){
+                             firstlist +="<tr class='betSelect'>"+"<td>"+ betType+"</td>"+"<td>"+ values[0].sportsType +"</td>"+"<td>"+ values[0].sportsTeam +"</td>"+"<td>"+ values[0].radio +"<td>"+ amount +'<button type="button" class="remove-bet">' + '&times;' + '</button>' +"</td>"+"</tr>";
+                             $.each(values.slice(1), function (index, val) {
+                                 list +="<tr class='betSelect parlayTR'>"+"<td class='hidenbetType'>"+ "" +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.radio +"<td class='hidenAmt'>"+ "" +"</td>"+"</tr>";
+                             });
+                             $('#saveBet').show();
+                         } else {
+                             $.alert({
+                                 title: 'Error!',
+                                 content: 'Please select 2 to 6 teams!',
+                             });
+                         }
+                     } else {
+                         $.each(values, function (index, val) {
+                             // list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.radio +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
+                             list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.radio +"<td>"+ amount + '<button type="button" class="remove-bet">' + '&times;' + '</button>' +"</td>"+"</tr>";
+                         });
+                         $('#saveBet').show();
+                     }
+
                  } else if ($('.thumbnails input:radio:checked').length > 0 && $('.thumbnails input:checkbox:checked').length > 0 ) {
                      $("input:checkbox:checked").each(function(){
                          row = $(this).closest("tr");
                          values.push({
-                             lineOdds : $(this).val() || " ",
+                             dOdds : $(this).val() || " ",
+                             dLine  : $(row).find("input[name=dLine]").val(),
                              sportsType  : $(row).find("input[name=sportsType]").val(),
                              sportsTeam  : $(row).find("input[name=sportsTeam]").val(),
                              // radio       :  $(row).find('input[type=radio]:checked').val() || " "
@@ -239,18 +287,44 @@ $('document').ready(function(){
                      });
                      console.log(values);
                      console.log(values2);
+                     var firstlist = "";
                      var list = "";
-                     $.each(values, function (index, val) {
-                         // list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.selectedTeam +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
-                         list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.lineOdds +"<td>"+ amount +"</td>"+"</tr>";
-                     });
-                     $.each(values2, function (index, val) {
-                         // list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.radio +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
-                         list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.radio +"<td>"+ amount +"</td>"+"</tr>";
-                     });
+                     if(betType == "Parlay"){
+                         if($("input:checked").length > 1 && $("input:checked").length < 7){
+                             firstlist +="<tr class='betSelect'>"+"<td>"+ betType+"</td>"+"<td>"+ values[0].sportsType +"</td>"+"<td>"+ values[0].sportsTeam +"</td>"+"<td>"+ values[0].dLine + values[0].dOdds  +"<td>"+ amount +'<button type="button" class="remove-bet">' + '&times;' + '</button>' +"</td>"+"</tr>";
+                             $.each(values, function (index, val) {
+                                 list +="<tr class='betSelect parlayTR'>"+"<td class='hidenbetType'>"+ "" +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.dLine + val.dOdds +"<td class='hidenAmt'>"+ "" +"</td>"+"</tr>";
+                             });
+                             $.each(values2.slice(1), function (index, val) {
+                                 list +="<tr class='betSelect parlayTR'>"+"<td class='hidenbetType'>"+ "" +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.radio +"<td>"+"</td>"+"<td class='hidenAmt'>"+ "" +"</td>"+"</tr>";
+                             });
+                             $('#saveBet').show();
+                         } else {
+                             $.alert({
+                                 title: 'Error!',
+                                 content: 'Please select 2 to 6 teams!',
+                             });
+                         }
+                     } else {
+                         $.each(values, function (index, val) {
+                             // list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.selectedTeam +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
+                             list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.dLine + val.dOdds +"<td>"+ amount + '<button type="button" class="remove-bet">' + '&times;' + '</button>' +"</td>"+"</tr>";
+                         });
+                         $.each(values2, function (index, val) {
+                             // list +="<tr class='betSelect'>"+"<td>"+ betType + ' , ' + val.sportsType +  ' , ' + val.radio +"</td>"+"<td>"+ amount +"</td>"+"</tr>";
+                             list +="<tr class='betSelect'>"+"<td>"+ betType +"</td>"+"<td>"+ val.sportsType +"</td>"+"<td>"+ val.sportsTeam +"</td>"+"<td>"+ val.radio +"<td>"+ amount + '<button type="button" class="remove-bet">' + '&times;' + '</button>' +"</td>"+"</tr>";
+                         });
+                         $('#saveBet').show();
+                     }
+
                  }
-                 $('#saveBet').show();
+                 // $('#saveBet').show();
+                 $("#tblConfirm tbody").append(firstlist);
                  $("#tblConfirm tbody").append(list);
+                 // $("#tblConfirm tbody tr.parlayTR:first td:last").removeClass('hidenAmt');
+                 // $("#tblConfirm tbody tr.parlayTR:first td:first").removeClass('hidenAmt');
+                 // $('table#tblConfirm > tbody > tr.parlayTR').not(':first').find('.hidenAmt').html('<button type="button" class="remove-bet">' + '&times;' + '</button>');
+                 // $('table#tblConfirm > tbody > tr.parlayTR').not(':first').find('.hidenbetType').html('');
                  $('input:radio, input:checkbox').prop('checked', false);
                  $('#amountID').val("");
              } else {
@@ -282,6 +356,7 @@ $('document').ready(function(){
             $('.column-footer').show();
         } else {
             $('.column-footer').hide();
+            $('#amountID').val("");
         }
     }
 });

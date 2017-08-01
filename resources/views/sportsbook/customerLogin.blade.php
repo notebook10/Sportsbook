@@ -41,8 +41,10 @@
                         <th>Team</th>
                         <th>Line</th>
                         <th>Odds</th>
-                        <th>Amount</th>
-                        <th>Game Date/Time</th>
+                        <th>Bet</th>
+                        <th>Win</th>
+                        <th>Lose</th>
+                        <th>Game Date</th>
                         <th>Bet No.</th>
                     </tr>
                     </thead>
@@ -74,7 +76,8 @@
                         <th>Team</th>
                         <th>Line</th>
                         <th>Odds</th>
-                        <th>Amount</th>
+                        <th>Result</th>
+                        <th>Score</th>
                         <th>Game Date</th>
                         <th>Bet No.</th>
                     </tr>

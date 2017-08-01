@@ -4,7 +4,7 @@
 $('document').ready(function(){
 
     var BASE_URL = $('#baseurl').val();
-
+    // $('#tblTeam tbody tr:first-child td:first-child').css('visibility', 'hidden')
     $( "#custName" ).autocomplete({
         source: function(request, response) {
             $.ajax({
@@ -57,7 +57,16 @@ $('document').ready(function(){
                 var noData = "";
                 if(obj.length > 0){
                     $.each(obj, function (index, value) {
-                            Betslist +="<tr>"+"<td>"+ obj[index].bet_type  +"</td>"+"<td>"+ obj[index].team +"</td>"+"<td>"+ obj[index].line +"</td>"+"<td>"+ obj[index].odds +"</td>"+"<td>"+ obj[index].bet_amt +"</td>"+"<td>"+ obj[index].game_date_time +"</td>"+"<td>"+ obj[index].bet_id +"</td>"+"</tr>";
+                        var myDate = new Date(obj[index].game_date_time)
+                        var locale = "en-us";
+                        if(obj[index].game_date_time == "0000-00-00 00:00:00"){
+                            var timeString = "Null";
+                        } else {
+                            var timeString = myDate.toLocaleString(locale, { month: "short" }) + '-' + (myDate.getDate()+1) + '-'
+                                + myDate.getFullYear() + ' ' + myDate.getHours() + ':' + myDate.getMinutes() + ':'
+                                + myDate.getSeconds();
+                        }
+                            Betslist +="<tr>"+"<td>"+ obj[index].bet_type  +"</td>"+"<td>"+ obj[index].team +"</td>"+"<td>"+ obj[index].line +"</td>"+"<td>"+ obj[index].odds +"</td>"+"<td>"+ obj[index].bet_amt +"</td>"+"<td>"+ obj[index].win  +"</td>"+"<td>"+ obj[index].lose  +"</td>"+"<td>"+ timeString +"</td>"+"<td>"+ obj[index].bet_id +"</td>"+"</tr>";
                     });
                     $("#tblPending tbody").html(Betslist);
                 } else {
@@ -89,7 +98,16 @@ $('document').ready(function(){
                 var noData = "";
                 if(obj.length > 0){
                     $.each(obj, function (index, value) {
-                        Betslist +="<tr>"+"<td>"+ obj[index].bet_type  +"</td>"+"<td>"+ obj[index].team +"</td>"+"<td>"+ obj[index].line +"</td>"+"<td>"+ obj[index].odds +"</td>"+"<td>"+ obj[index].bet_amt +"</td>"+"<td>"+ obj[index].game_date_time +"</td>"+"<td>"+ obj[index].bet_id +"</td>"+"</tr>";
+                        var myDate = new Date(obj[index].game_date_time)
+                        var locale = "en-us";
+                        if(obj[index].game_date_time == "0000-00-00 00:00:00"){
+                            var timeString = "Null";
+                        } else {
+                            var timeString = myDate.toLocaleString(locale, { month: "short" }) + '-' + (myDate.getDate()+1) + '-'
+                                + myDate.getFullYear() + ' ' + myDate.getHours() + ':' + myDate.getMinutes() + ':'
+                                + myDate.getSeconds();
+                        }
+                        Betslist +="<tr>"+"<td>"+ obj[index].bet_type  +"</td>"+"<td>"+ obj[index].team +"</td>"+"<td>"+ obj[index].line +"</td>"+"<td>"+ obj[index].odds +"</td>"+"<td>"+ obj[index].result +"</td>"+"<td>"+ obj[index].score +"</td>"+"<td>"+ timeString +"</td>"+"<td>"+ obj[index].bet_id +"</td>"+"</tr>";
                     });
                     $("#tblPastBets tbody").html(Betslist);
                 } else {
@@ -101,6 +119,10 @@ $('document').ready(function(){
                 console.log(error);
             }
         });
+    });
+
+    $('.pLogout').on('click', function(){
+        window.location.href = BASE_URL;
     });
 
 });

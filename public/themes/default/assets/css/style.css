@@ -122,7 +122,7 @@ div#radio-sports {
     text-align: center;
     margin-bottom: 5px;
 }
-.remove-thumbnail {
+.remove-thumbnail, .remove-bet {
     -webkit-appearance: none;
     padding: 0;
     cursor: pointer;
@@ -180,7 +180,7 @@ input[type="checkbox"], input[type=radio] {
 #saveBet .form-body {
     max-height: 265px;
     height: 265px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .navbar-nav>li>a {

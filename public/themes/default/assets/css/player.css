@@ -75,8 +75,8 @@ ul#divLoginDisplay {
     color: red;
 }
 
-div#modalCurrent .modal-content,
-div#modalPast .modal-content {
+div#modalCurrent .modal-dialog,
+div#modalPast .modal-dialog {
     width: 900px;
 }
 
@@ -106,3 +106,11 @@ div#modalPast .modal-body {
     text-align: center;
     margin-top: 110px;
 }
+
+#tblConfirm tbody tr td {
+    position: relative;
+}
+
+/*.hidenAmt {*/
+    /*visibility: hidden !important;*/
+/*}*/

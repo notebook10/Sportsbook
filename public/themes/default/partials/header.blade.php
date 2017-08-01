@@ -12,12 +12,12 @@
                 <ul class="nav navbar-nav" id="divLoginDisplay">
                     <li class="dataClass"><p class="PcustName">Username : </p><p id="PcustName"></p></li>
                     <li class="dataClass"><p class="Ppassword">Password : </p><p id="Ppassword"></p></li>
-                    <li class="dataClass"><p class="Pbalance">Balanced : </p><p id="Pbalance"></p></li>
+                    <li class="dataClass"><p class="Pbalance">Balance : </p><p id="Pbalance"></p></li>
                     <li><a data-toggle="modal" data-target="#modalPast" id="viewPast">Past Bets</a></li>
                     <li>
                         <a data-toggle="modal" data-target="#modalCurrent" id="viewCurrent">Pending Bets</a>
                     </li>
-                    <li><a class="pLogout" href="/">Logout Player</a></li>
+                    <li><a class="pLogout">Logout Player</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

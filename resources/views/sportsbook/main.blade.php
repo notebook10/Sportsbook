@@ -73,7 +73,7 @@
                     </div>
                     <div class="column-footer">
                         <div class="col-xs-5">
-                            <input type="text" class="form-control" placeholder="Amount" required id="amountID">
+                            <input type="text" class="form-control" placeholder="Amount" required onkeypress='validate(event)'  id="amountID">
                         </div>
                         <div class="col-xs-7">
                             <input type="button" class="btnBet btn btn-primary" id="btnStraight" value="Straight">
