@@ -4,7 +4,6 @@
 $('document').ready(function(){
 
     var BASE_URL = $('#baseurl').val();
-    // $('#tblTeam tbody tr:first-child td:first-child').css('visibility', 'hidden')
     $( "#custName" ).autocomplete({
         source: function(request, response) {
             $.ajax({
@@ -41,7 +40,6 @@ $('document').ready(function(){
     $('body').delegate('#viewCurrent','click',function(){
         $('#player').val($("#divLoginDisplay #PcustName").text());
         var player = $('#player').val();
-        // alert(player);
         $.ajax({
             'url' : BASE_URL + '/viewBets',
             type : 'POST',

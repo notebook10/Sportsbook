@@ -122,7 +122,7 @@ div#radio-sports {
     text-align: center;
     margin-bottom: 5px;
 }
-.remove-thumbnail, .remove-bet {
+.remove-thumbnail, .remove-bet, .remove-parlay {
     -webkit-appearance: none;
     padding: 0;
     cursor: pointer;
@@ -181,6 +181,7 @@ input[type="checkbox"], input[type=radio] {
     max-height: 265px;
     height: 265px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .navbar-nav>li>a {
@@ -198,4 +199,10 @@ input[type="checkbox"], input[type=radio] {
 }
 table#tblSColumn {
     margin-bottom: 0px;
+}
+.parlayGroup {
+    border: solid 3px #00724b !important;
+}
+#tblConfirm tbody tr td {
+    padding: 0 0 0 10px !important;
 }

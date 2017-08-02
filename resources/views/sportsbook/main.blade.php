@@ -28,7 +28,7 @@
                         <td>{{ $value->LINE < 0 ? $value->LINE : $value->VS_LINE }}</td>
                         <td>{{ $value->TOTAL > 900 ? "NL" : $value->TOTAL }}</td>
                         <td class="btnTeam {{ $value->VS_LINE < 0 ? "TEAM" :"OPPONENT" }}">{{ $value->VS_LINE < 0 ? $value->TEAM : $value->OPPONENT }}</td>
-                        <td>{{ $value->GAME_DATE }} / {{ $value->GAME_TIME }}</td>
+                        <td>{{ Carbon\Carbon::parse($value->GAME_DATE)->format('M-d-Y') }} / {{ $value->GAME_TIME }}</td>
                         <td style="text-align: center; display: none;">{{ $value->SPORT }}</td>
                     </tr>
                 @endforeach
@@ -43,7 +43,7 @@
                         @endif
                         <td>{{ $value->TOTAL > 900 ? "NL" : $value->TOTAL }}</td>
                         <td class="btnTeam2 OPPONENT">{{ $value->OPPONENT }}</td>
-                        <td>{{ $value->GAME_DATE }} / {{ $value->GAME_TIME }}</td>
+                        <td>{{ Carbon\Carbon::parse($value->GAME_DATE)->format('M-d-Y') }} / {{ $value->GAME_TIME }}</td>
                         <td style="text-align: center; display: none">{{ $value->SPORT }}</td>
                     </tr>
                 @endforeach
@@ -90,26 +90,46 @@
                         <table id="tblConfirm" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Bet Type</th>
+                                <th>Type</th>
                                 <th>Sports</th>
                                 <th>Team</th>
                                 <th>Spread</th>
                                 <th>Payoff</th>
                             </tr>
                             </thead>
-                            <tbody>
-
+                            <tbody class="main">
                             </tbody>
                         </table>
                     </div>
                     <div class="form-footer buttonDiv">
-                        <input type="button" class=" btn btn-success" id="btnSaveBet" value="Submit">
-                        <input type="button" class=" btn btn-info" id="btnCancelBet" value="Cancel">
+                        <input type="button"  data-toggle="modal" data-target="#modalSubmitBet" class=" btn btn-success" id="btnSaveBet" value="Submit">
+                        <input type="button" class=" btn btn-danger" id="btnCancelBet" value="Cancel">
                     </div>
                 </form>
 
             </div>
 
         </div>
+    </div>
+</div>
+
+<div id="modalSubmitBet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Read Back Bets</h3>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" id="btnConfirm" class="btn btn-primary" value="Confirm">
+                <input type="button" id="btnNotConfirm" class="btn btn-danger" value="Cancel">
+            </div>
+        </div>
+
     </div>
 </div>
