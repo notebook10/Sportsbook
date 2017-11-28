@@ -41,10 +41,10 @@
                         <th>Team</th>
                         <th>Line</th>
                         <th>Odds</th>
+                        <th>Game Date</th>
                         <th>Bet</th>
                         <th>Win</th>
                         <th>Lose</th>
-                        <th>Game Date</th>
                         <th>Bet No.</th>
                     </tr>
                     </thead>

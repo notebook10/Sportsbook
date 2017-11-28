@@ -26,4 +26,17 @@ Route::group(['middleware' => ['auth']], function (){
     Route::match(array('get', 'post'),'/viewPendingBets', 'HomeController@viewPendingBets');
     Route::match(array('get', 'post'),'/viewBets', 'HomeController@viewBets');
     Route::match(array('get', 'post'),'/viewPastBets', 'HomeController@viewPastBets');
+    Route::match(array('get', 'post'),'/saveBets', 'HomeController@saveBets');
+    Route::match(array('get', 'post'),'/saveParlayBets', 'HomeController@saveParlayBets');
+    Route::match(array('get', 'post'),'/saveTeaserBets', 'HomeController@saveTeaserBets');
+    Route::match(array('get', 'post'),'/saveAllBets', 'HomeController@saveAllBets');
+    Route::match(array('get', 'post'),'/saveSPBets', 'HomeController@saveSPBets');
+    Route::match(array('get', 'post'),'/saveSTBets', 'HomeController@saveSTBets');
+    Route::match(array('get', 'post'),'/savePTBets', 'HomeController@savePTBets');
+    Route::match(array('get', 'post'),'/saveTotalWager', 'HomeController@saveTotalWager');
+
+
+    Route::match(array('get', 'post'),'/sysop-page', 'AdminController@sysopPage');
+    Route::match(array('get', 'post'),'/getTeamFinish', 'AdminController@getTeamFinish');
+    Route::match(array('get', 'post'),'/updateScore', 'AdminController@updateScore');
 });

@@ -7,18 +7,22 @@ use DB;
 
 class Sched extends Model
 {
-    protected $table = 'sched';
+    protected $table = 'score';
 
     public function getall(){
         return DB::table($this->table)
-            ->where('LINE', '>=', 999)
-            ->orWhere('LINE', '=', 0)
+            ->where('line', '>=', 900)
+            ->orWhere('line', '=', 0)
+            ->where('status', '=' ,'T')
+            ->orWhere('status', '=' ,'U')
             ->get();
     }
     public function getTeamFavorite(){
         return DB::table($this->table)
-            ->where('LINE', '<', 0)
-            ->orWhere('VS_LINE', '<', 0)
+            ->where('line', '<', 0)
+            ->orWhere('vs_line', '<', 0)
+            ->where('status', '=' ,'T')
+            ->orWhere('status', '=' ,'U')
 //            ->orderBy('LINE')
             ->get();
     }
@@ -34,8 +38,8 @@ class Sched extends Model
 //    }
     public function getSchedByTeamNo($TGAMENO, $SPORT){
         return DB::table($this->table)
-            ->where('TGAMENO', $TGAMENO)
-            ->where('SPORT', $SPORT)
+            ->where('tgameno', $TGAMENO)
+            ->where('sport', $SPORT)
             ->first();
     }
 }

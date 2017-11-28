@@ -58,7 +58,10 @@ return array(
                 ['player', 'css/player.css'],
                 ['script', 'js/script.js'],
                 ['player', 'js/player.js'],
-                ['bets', 'js/bets.js']
+                ['bets', 'js/bets.js'],
+                ['StraightBet', 'js/StraightBet.js'],
+                ['ParlayBet', 'js/ParlayBet.js'],
+                ['TeaserBet', 'js/TeaserBet.js']
             ]);
 
 			// You may use elixir to concat styles and scripts.

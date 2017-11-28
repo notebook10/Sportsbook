@@ -46,5 +46,13 @@ class operator extends Authenticatable
 //            return 'admin';
 //        }
     }
+    public static function checksysopttype($OperatorID){
+        operator::where('OperatorID',$OperatorID)->first();
+//        if($currentuser->LVL == 1){
+            return '/sysopt';
+//        }else if($currentuser->LVL == 2){
+//            return 'admin';
+//        }
+    }
 
 }

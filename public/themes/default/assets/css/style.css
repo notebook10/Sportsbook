@@ -45,15 +45,15 @@ div#tblTeam_length {
     /*background: rgba(255,255,255,0.6);*/
     /*padding: 10px 25px;*/
     /*border-radius: 20px;*/
-    height: 285px;
-    max-height: 285px;
+    height: 225px;
+    max-height: 225px;
     overflow: auto;
 }
 .column-footer {
-    background: rgba(255,255,255,0.5);
-    padding: 10px;
-    border-radius: 20px;
-    margin-top: 30px;
+    /*background: rgba(255,255,255,0.5);*/
+    /*padding: 10px;*/
+    /*border-radius: 20px;*/
+    /*margin-top: 30px;*/
     text-align: center;
     position: absolute;
     bottom: 5px;
@@ -111,7 +111,7 @@ div#radio-sports {
     /*DISPLAY: INLINE;*/
 /*}*/
 .thumbnails {
-    font-size: 14px;
+    font-size: 12px;
     background: rgba(255,255,255,0.6);
     padding: 1px 0px;
     /*border-radius: 20px;*/
@@ -131,34 +131,43 @@ div#radio-sports {
     font-size: 21px;
     font-weight: 700;
     line-height: 1;
-    color: red;
     text-shadow: 0 1px 0 #fff;
     filter: alpha(opacity=20);
     opacity: .2;
     position: absolute;
-    right: 5px;
     top: 0px;
+    width: 15px;
+    color: red;
+    right: 0 !important;
+}
+.remove-thumbnail:hover, .remove-bet:hover, .remove-parlay:hover {
+    color: #ffffff;
+    background: red;
 }
 #btnStraight, #btnParlay {
-    margin-right: 27px;
+    margin-right: 5px;
 }
 
 .thumbnails table tr td {
     padding: 0 0 0px 10px;
     vertical-align: middle;
 }
-input[type="checkbox"], input[type=radio] {
+#divSched input[type="checkbox"],#divSched input[type=radio] {
+    margin-top: 2px;
+    margin-left: -17px !important;
+}
+#radio-sports input[type="checkbox"],#radio-sports input[type=radio] {
     margin-top: 4px;
     margin-left: -17px !important;
 }
 .table {
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 .thumbnails .table>thead>tr>th {
     padding: 0 10px !important;
     width: 25%;
 }
-#saveBet, .column-footer {
+#saveBet, .column-footer, #tblSColumn {
     display: none;
 }
 #tblConfirm tr {
@@ -193,16 +202,111 @@ input[type="checkbox"], input[type=radio] {
     margin-bottom: 50px;
 }
 
-#divSched tbody tr td,
-#divSched table tr th{
+#divSched .sched-column-content tbody tr td,
+#divSched table#tblSColumn tr th
+,#tblConfirm table tr th
+{
     width: 25%;
+    padding: 0px 5px;
 }
-table#tblSColumn {
+.dpInline {
+    display: inline;
+}
+#divSched .sched-column-content-BS tbody tr td,
+#divSched table#tblSColumnforBS tr th{
+    width: 18%;
+    padding: 0px 5px;
+}
+#divSched .sched-column-content-BS tbody tr td:nth-child(2),
+#divSched table#tblSColumnforBS tr th:nth-child(2){
+    width: 28% !important;
+}
+table#tblSColumnforBS tr th {
+    font-size: 11px;
+}
+table#tblSColumn, table#tblSColumnforBS {
     margin-bottom: 0px;
 }
-.parlayGroup {
+.parlayGroup, .teaserGroup {
     border: solid 3px #00724b !important;
 }
 #tblConfirm tbody tr td {
     padding: 0 0 0 10px !important;
+}
+
+.parlayGroup tr td:last-child,
+.teaserGroup tr td:last-child{
+    border-right: solid 3px #00724b !important;
+}
+.parlayGroup tr:first-child td:last-child,
+.teaserGroup tr:first-child td:last-child{
+    border: solid 3px #00724b !important;
+}
+
+.trForParlay,.trForTeaser {
+    display: none;
+}
+
+.btnBet {
+    padding: 4px;
+    margin-top: 5px;
+}
+.footer-btn {
+    padding: 6px !important;
+    background: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    margin-top: 2px;
+}
+.wagerA, #amountID {
+    display: inline;
+    width: 170px;
+    margin-right: 5px;
+}
+
+#modalSubmitBet .modal-content {
+    top: 70px !important;
+    width: 700px;
+}
+table#tblbackread tr td {
+    border: none;
+    /*width: 25%;*/
+    padding: 5px;
+}
+
+.Pgroup-border {
+    border-top: 2px solid #ddd;
+}
+#clearSelect {
+    padding: 4px;
+    margin-top: 0;
+}
+select#buyPoint {
+    width: 100px;
+    padding: 0px 1px;
+    display: inline;
+}
+#tblSColumnforBS {
+    display: none;
+}
+.sched-column-content-BS .pitchertd .radio-inline input[type=radio]{
+    position: relative !important;
+    margin-top: 0 !important;
+}
+.ptname {
+    float: left;
+}
+.ptAL {
+    float: right;
+}
+.BSRL td:nth-child(1){
+    vertical-align: top !important;
+}
+.hidePlayerInfo {
+    display: none;
+}
+.HiddenTotalBet {
+    display: none;
+}
+#pcurrentbet{
+    display: inline;
 }

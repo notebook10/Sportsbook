@@ -26,16 +26,16 @@ button#btnSubmitPlayer {
     display: inline;
 }
 
-#Pbalance, .Pbalance {
+#ABalance, .Pbalance {
     display: inline;
 }
 
 ul#divLoginDisplay li {
-    margin-right: 25px;
+    margin-right: 20px;
 }
 
 ul#divLoginDisplay .dataClass {
-    top: 27px;
+    top: 10px;
 }
 
 ul#divLoginDisplay {

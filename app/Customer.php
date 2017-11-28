@@ -9,7 +9,7 @@ class Customer extends Model
 {
 
 
-    protected $table = 'cust';
+    protected $table = 'score';
 
     public function getCustName($name){
         return DB::table($this->table)
